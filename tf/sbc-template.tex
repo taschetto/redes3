@@ -23,39 +23,103 @@
 \maketitle
 
 \begin{abstract}
-  This article presents an introduction to network analysis forensics tools, enlighetning its importance, operation and discurring about its usage implications and results.
+  This article presents an introduction to network capture and analysis forensics tools, enlighetning its importance, operation and discurring about its usage implications and results.
 \end{abstract}
 
 \begin{resumo}
-  Este artigo apresenta uma introdução às ferramentas forenses de análise de rede, salientando a sua importância, a sua forma de funcionamento e discorrendo sobre as implicações do seu uso e de seus resultados.
+  Este artigo apresenta uma introdução às ferramentas forenses de captura e análise de rede, salientando a sua importância, a sua forma de funcionamento e discorrendo sobre as implicações do seu uso e de seus resultados.
 \end{resumo}
 
 \section{Introdução}
 
 A importância da perícia forense digital cresceu muito nos últimos anos. Através de processos, metodologias e ferramentas, a perícia forense digital é capaz de produzir as evidências e provas necessárias para condenar (ou inocentar) criminosos digitais.
 
-Este artigo estuda um grupo particular de ferramentas: as ferramentas de rede para perícia forense. Tais ferramentas são de muita importância para o processo forense, pois elas coletam dados de todos os ativos disponíveis na rede como: IDS, IPS, Servidor de Logs, conexões capturadas por sniffers de rede etc. Após a coleta de evidências, é necessário realizar a análise destes pacotes. Para isto, são utilizadas as ferramentas de análise forense de redes, onde os pacotes capturados serão usados como base para remontar os dados reais das camadas mais altas de aplicação.
+Os 4 passos da análise forense de rede são:
+
+\begin{itemize}
+\item Identificar fontes de evidência aceitas pelo sistema legal;
+\item Preservar a evidência;
+\item Analisar a evidência;
+\item Apresentar o resultado da análise.
+\end{itemize}
+
+Abordaremos ferramentas para a realização dos passos 2 e 3 da análise forense, as chamadas ferramentas de rede para perícia forense.
+
+O segundo passo (preservar a evidência) consiste na coleta de dados de todos os ativos disponíveis na rede como: IDS, IPS, Servidor de Logs, conexões capturadas por sniffers de rede etc. Após a coleta de evidências, é necessário realizar a análise destes pacotes - terceiro passo da análise forense. Para isto, são utilizadas as ferramentas de análise forense de redes, onde os pacotes capturados serão usados como base para remontar os dados reais das camadas mais altas de aplicação.
 
 Tais dados ajudam ajudam o perito computacional na obtenção de evidências para solução dos casos, fornecendo provas irrefutáveis que serão apresentadas no laudo pericial.
 
-\section{Ferramentas de Análise Forense de Redes}
+\section{Ferramentas de Captura de Pacotes - Preservando a Evidência}
 
-Ferramentas de Análise Forense de Redes (Network Forensic Analysis Tool, NFAT) normalmente realizam análises à partir de arquivos PCAP, que pode ser facilmente gerados em aplicações bem conhecidas como Wireshark. Em arquivos PCAP são armazenados fluxos de comunicação de rede de diversos protocolos. Ao analisar estes arquivos, as ferramentas NFAT conseguem extrair os dados das comunicações. Por exemplo:
+O \texttt{PCAP} é uma API (Application Programming Interface) para a captura de tráfego de rede. Em sistemas operacionais baseados em Linux, o \texttt{PCAP} pode ser utilizado através da biblioteca \texttt{libpcap}, mantida pelo time de desenvolvedores do TCPDump; já em sistemas Windows, a biblioteca é distribuída por meio da \texttt{WinPCap}, mantida pela Riverbed Tech, principal patrocinador do projeto Wireshark.
+
+O \texttt{PCAP} provê uma forma integrada para realizar a captura e a filtragem inteligente de pacotes de rede, suportando uma imensa gama de protocolos, sejam abertos ou proprietários. Além disso, a biblioteca provê a funcionalidade de persistência destes pacotes capturados em arquivos, o que atende o objetivo do segundo passo da análise forense de rede: preservar a evidência.
+
+A API do \texttt{PCAP} é escrita em linguagem C, possuindo wrappers para diversas linguagens e frameworks populares, como C++, Java, Ruby, Haskell, Perl, OCaml, TCL, Python, GoLang, entre outros.
+
+\subsection{Wireshark}
+
+O Wireshark\footnote{https://www.wireshark.org/} é um analisador de pacotes multi-plataforma, grátis e de código-fonte aberto. Possui uma interface gráfica bastante amigável e de fácil utilização com vários recursos integrados, desenvolvida utilizando o toolkit GTK+ a API \texttt{PCAP} para realizar a captura e filtragem de pacotes. Também existe uma versão baseada em linhas de comando chamada TShark (menos famosa).
+
+O Wireshark permite a operação no modo promíscuo, onde todo o tráfego da rede visível pela interface é capturada, e não somente tráfego direcionado aos endereços locais ou de broadcast/multicast. Entretanto, o modo promíscuo tem sua utilidade ceifada em redes que utilizam switches, uma vez que o tráfego dos pacotes já é direcionado.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{img/wireshark.png}
+    \caption{Wireshark, o \"predador\" de pacotes.}
+    \label{fig:wireshark}
+\end{figure}
+
+\subsection{tcpdump}
+
+O tcpdump\footnote{http://www.tcpdump.org/} é um analisador de pacotes operado por linha de comando. No modo padrão de operação, o tcpdupmp imprime o conteúdo de pacotes no terminal, sejam pacotes capturados ao vivo ou proveniente de arquivos de pacotes armazenados.
+
+Assim como o Wireshark, o tcpdump também pode operar no modo promíscuo.
+
+\textbf{Exemplo de utilização:} \texttt{tcpdump -i wlan0 -A tcp port http -w capture.pcap}
+
+\textbf{Explicação:} capture todos os pacotes HTTP (TCP) na interface wlan0 e salve-os no arquivo capture.pcap.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{img/tcpdump.png}
+    \caption{tcpdump furiosamente capturando pacotes HTTP.}
+    \label{fig:tcpdump}
+\end{figure}
+
+\subsection{ngrep}
+
+O ngrep\footnote{http://ngrep.sourceforge.net/} é uma ferramenta bastante parecida com o tcpdump, com o diferencial de possuir a capacidade de filtrar pacotes aplicando expressões regulares nos respectivos payloads.
+
+\textbf{Exemplo de utilização:} \texttt{ngrep -l -q -d wlan0 -i "\^{}GET | \^{}POST" \ tcp and port 80 -O capture.pcap}
+
+\textbf{Explicação:} capture todos os pacotes na porta TCP 80 (HTTP) na interface wlan0 que sejam do tipo GET ou POST e salve-os no arquivo capture.pcap.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{img/ngrep.png}
+    \caption{O ngrep é capaz filtrar pacotes de forma sagaz utilizando expressões regulares.}
+    \label{fig:ngrep}
+\end{figure}
+
+\section{Ferramentas de Análise Forense de Redes - Analisando a Evidência}
+
+Ferramentas de Análise Forense de Redes (Network Forensic Analysis Tool, NFAT) normalmente realizam análises à partir de arquivos \texttt{PCAP}. Em arquivos \texttt{PCAP} são armazenados fluxos de comunicação de rede de diversos protocolos. Ao analisar estes arquivos, as ferramentas NFAT conseguem extrair os dados das comunicações. Por exemplo:
 
 \begin{itemize}
-  \item Requisições e páginas HTML (+JS + CSS) sobre o protocolo HTTP;
+  \item Requisições e páginas HTML (com JS e CSS) sobre o protocolo HTTP;
   \item E-mails sobre os protocolos POP, SMTP e IMAP;
   \item Conversas telefônicas sobre o protocolo SIP;
-  \item Entre diversas outros protocolos de aplicação, como DNS, ARP, SIP, FTP, TFTP etc.
+  \item Entre diversas outros protocolos, como DNS, ARP, SIP, FTP, TFTP etc.
 \end{itemize}
 
 Porém não há mágica: não há como remontar os dados trocados em comunicações seguras (criptografadas), porém é possível identificar diversas informações da comunicação em si - por exemplo, endereços físicos e lógicos das partes envolvidas.
 
-Alémd isso é importante salientar que as ferramentas NFAT não são ferramentas de análise e captura de protocolos de rede, e sim ferramentas de análise forense de redes. Embora algumas até possuam o recurso de capturar pacotes, este não é um requisito para considerar a ferramenta NFAT, tampouco é o foco de seus recursos.
+Além disso é importante salientar que as ferramentas NFAT não são ferramentas de análise e captura de protocolos de rede, e sim ferramentas de análise forense de redes. Embora algumas até possuam o recurso de capturar pacotes, este não é um requisito para considerar a ferramenta NFAT, tampouco é o foco de seus recursos.
 
 \subsection{Xplico}
 
-O Xplico é uma ferramenta NFAT open-source cujo objetivo é extrair dados contidos em arquivos de capturas de pacotes (formato PCAP). O Xplico é distribuído sob a GNU General Public License e alguns scripts sob a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) License.
+O Xplico é uma ferramenta NFAT open-source cujo objetivo é extrair dados contidos em arquivos de capturas de pacotes (formato \texttt{PCAP}). O Xplico é distribuído sob a GNU General Public License e alguns scripts sob a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) License.
 
 As principais características do Xplico são:
 
@@ -75,24 +139,23 @@ O Xplico pode ser instalado e executado em qualquer distribuição Linux. Além 
 
 \subsection{CapAnalysis}
 
-O CapAnalysis é uma ferramenta NFAT web proprietária que também extrai dados à partir de arquivos PCAP. Diferentemente do Xplico, o CapAnalysis proprietário e, portanto, sua licença de uso deve ser paga.
+O CapAnalysis é uma ferramenta NFAT web proprietária que também extrai dados à partir de arquivos \texttt{PCAP}. Diferentemente do Xplico, o CapAnalysis proprietário e, portanto, sua licença de uso deve ser paga.
 
 As principais características do CapAnalysis são:
 
 \begin{itemize}
   \item Suporte aos protocolos mais utilizados diariamente no mundo inteiro;
   \item Remontagem TCP;
-  \item Filtro avançado de fluxos PCAP;
+  \item Filtro avançado de fluxos \texttt{PCAP};
   \item Inspeção profunda e detalhada de pacotes;
   \item Geolocalização.
 \end{itemize}
 
-Assim como o Xplico, o CapAnalysis pode ser instalado e executado em qualquer distribuição Linux. Também conta com uma versão de demonstração online, não informando se há limite para o tamanho do arquivo PCAP. A versão de demonstração pode ser acessada em \href{http://pcap.capanalysis.net/}{http://pcap.capanalysis.net/}.
+Assim como o Xplico, o CapAnalysis pode ser instalado e executado em qualquer distribuição Linux. Também conta com uma versão de demonstração online, não informando se há limite para o tamanho do arquivo \texttt{PCAP}. A versão de demonstração pode ser acessada em \href{http://pcap.capanalysis.net/}{http://pcap.capanalysis.net/}.
 
 \section{Estudo de Caso: Xplico}
 
-Como o foco aqui é a análise forense dos pacotes, foi gerado um arquivo PCAP realizando uma captura de alguns segundos através do Wireshark. Durante a captura foram acessadas páginas web não criptografadas, realizadas sincronias utilizando o Dropbox, entre outras operações de rede menos significativas. À partir deste arquivo gerado foi possível extrair diversas informações no Xplico.
-
+Como o foco aqui é a análise forense dos pacotes, foi gerado um arquivo \texttt{PCAP} realizando uma captura de alguns segundos através do Wireshark. Durante a captura foram acessadas páginas web não criptografadas, realizadas sincronias utilizando o Dropbox, entre outras operações de rede menos significativas. À partir deste arquivo gerado foi possível extrair diversas informações no Xplico.
 
 \begin{figure}[ht]
     \centering
@@ -101,16 +164,12 @@ Como o foco aqui é a análise forense dos pacotes, foi gerado um arquivo PCAP r
     \label{fig:report}
 \end{figure}
 
-Na figura 1 é apresentado um resumo da análise, com diversas requisições HTTP (tanto GET quanto POST), alguns pacotes DNS e alguns outros que não foram possíveis decifrar (comunicações criptografadas).
-
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.4]{img/1.png}
     \caption{Requisições HTTP}
     \label{fig:http}
 \end{figure}
-
-Na figura 2 podemos ver a listagem de todas as requisições HTTP encontradas durante a análise.
 
 \begin{figure}[ht]
     \centering
@@ -119,8 +178,6 @@ Na figura 2 podemos ver a listagem de todas as requisições HTTP encontradas du
     \label{fig:cookie}
 \end{figure}
 
-Na figura 3 é apresentado o detalhamento dos headers do HTTP POST, contendo uma informação muito interessante: o token de cookie de sessão. Esta informação pode ser utilizada para roubo de sessão, conforme o trabalho do colega William Martins.
-
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.4]{img/4.png}
@@ -128,14 +185,13 @@ Na figura 3 é apresentado o detalhamento dos headers do HTTP POST, contendo uma
     \label{fig:imagem}
 \end{figure}
 
-Na figura 4 podemos ver que o Xplico também é capaz de remontar tipos de dados mais complexos, como arquivos de imagem (binário).
-
 \section{Conclusão}
 
-Após a pesquisa e o estudo de ferramentas NFAT, fica evidente a sua relevância e aplicação na computação forense moderna. Executar o Wireshark em modo promíscuo e capturar todo o tráfego de uma rede é uma tarefa trivial. Ser capaz de analisar de forma rápida e simples estes dados capturados é de grande utilidade, seja em investigações públicas como em investigações corporativas. Por exemplo, poder-se-ia identificar usuários acessando conteúdos indevidos na empresa (redes sociais, pornografia, etc) ou até mesmo buscar por consumidores de pedofilia ao analisar o tráfego em pontos estratégicos em WANs.
+Após a pesquisa e o estudo de ferramentas NFAT, fica evidente a sua relevância e aplicação na computação forense moderna. Executar ferramentas de captura em modo promíscuo e capturar todo o tráfego de uma rede é uma tarefa trivial. Ser capaz de filtrar e analisar de forma rápida e simples estes dados capturados é de grande importância, seja em investigações públicas como em investigações corporativas. Por exemplo, poder-se-ia identificar usuários acessando conteúdos indevidos na empresa (redes sociais, pornografia, etc) ou até mesmo buscar por consumidores de pedofilia ao analisar o tráfego em pontos estratégicos em WANs.
 
 Entretanto, considero estas ferramentas uma faca de dois gumes: ao mesmo tempo que auxilia na identificação e condenação de infratores e criminosos, também afeta a privacidade dos bons usuários das redes, que não cometem crimes e tem suas informações acessadas muitas vezes sem o seu consentimento.
 
+\nocite{*}
 \bibliographystyle{sbc}
 \bibliography{sbc-template}
 

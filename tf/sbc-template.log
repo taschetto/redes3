@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.26)  27 MAY 2015 21:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.26)  7 JUN 2015 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -593,93 +593,115 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 25.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 33.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 46.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 40.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 46.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 54.
 
-Underfull \hbox (badness 2894) in paragraph at lines 52--53
-[]\OT1/ptm/m/n/12 Por[]em n[]ao h[]a m[]agica: n[]ao h[]a como re-mon-tar os da
--dos tro-ca-dos em
- []
-
-[1
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 63.
+(Font)              <7> on input line 62.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 63.
- [2]
-<img/2.png, id=47, 839.135pt x 635.37375pt>
-File: img/2.png Graphic file (type png)
- <use img/2.png>
-Package pdftex.def Info: img/2.png used on input line 99.
-(pdftex.def)             Requested size: 335.64804pt x 254.14499pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 100.
+(Font)              <5> on input line 62.
 
+<img/wireshark.png, id=57, 917.4275pt x 498.86375pt>
+File: img/wireshark.png Graphic file (type png)
+ <use img/wireshark.png>
+Package pdftex.def Info: img/wireshark.png used on input line 68.
+(pdftex.def)             Requested size: 366.96451pt x 199.54196pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 69.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 100.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 69.
+ [2 <./img/wireshark.png>] <img/tcpdump.png, id=69, 915.42pt x 432.61626pt>
+File: img/tcpdump.png Graphic file (type png)
+ <use img/tcpdump.png>
+Package pdftex.def Info: img/tcpdump.png used on input line 85.
+(pdftex.def)             Requested size: 366.16151pt x 173.04343pt.
 
-<img/1.png, id=49, 839.135pt x 635.37375pt>
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+[]\OT1/ptm/b/n/12 Exemplo de utiliza[][]ao: \OT1/pcr/m/n/12 ngrep -l -q -d wlan
+0 -i "^GET |
+ []
+
+<img/ngrep.png, id=71, 915.42pt x 432.61626pt>
+File: img/ngrep.png Graphic file (type png)
+ <use img/ngrep.png>
+Package pdftex.def Info: img/ngrep.png used on input line 100.
+(pdftex.def)             Requested size: 366.16151pt x 173.04343pt.
+ [3 <./img/tcpdump.png> <./img/ngrep.png>]
+Underfull \hbox (badness 2894) in paragraph at lines 116--117
+[]\OT1/ptm/m/n/12 Por[]em n[]ao h[]a m[]agica: n[]ao h[]a como re-mon-tar os da
+-dos tro-ca-dos em
+ []
+
+[4] <img/2.png, id=89, 839.135pt x 635.37375pt>
+File: img/2.png Graphic file (type png)
+ <use img/2.png>
+Package pdftex.def Info: img/2.png used on input line 162.
+(pdftex.def)             Requested size: 335.64804pt x 254.14499pt.
+
+<img/1.png, id=90, 839.135pt x 635.37375pt>
 File: img/1.png Graphic file (type png)
  <use img/1.png>
-Package pdftex.def Info: img/1.png used on input line 108.
+Package pdftex.def Info: img/1.png used on input line 169.
 (pdftex.def)             Requested size: 335.64804pt x 254.14499pt.
 
-<img/3.png, id=50, 839.135pt x 635.37375pt>
+<img/3.png, id=91, 839.135pt x 635.37375pt>
 File: img/3.png Graphic file (type png)
  <use img/3.png>
-Package pdftex.def Info: img/3.png used on input line 117.
+Package pdftex.def Info: img/3.png used on input line 176.
 (pdftex.def)             Requested size: 335.64804pt x 254.14499pt.
 
-<img/4.png, id=51, 839.135pt x 450.68375pt>
+<img/4.png, id=92, 839.135pt x 450.68375pt>
 File: img/4.png Graphic file (type png)
  <use img/4.png>
-Package pdftex.def Info: img/4.png used on input line 126.
+Package pdftex.def Info: img/4.png used on input line 183.
 (pdftex.def)             Requested size: 335.64804pt x 180.2703pt.
- [3 <./img/2.png>]
-(./sbc-template.bbl
+ [5 <./img/2.png>]
+(./sbc-template.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 198.
+ [6 <./img/1.png>] [7 <./img/3.png> <./img/4.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 198.
 
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 142.
- [4 <./img/1.png>] [5 <./img/3.png> <./img/4.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 142.
- (./sbc-template.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 142.
+(./sbc-template.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 198.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 198.
 Package rerunfilecheck Info: File `sbc-template.out' has not changed.
-(rerunfilecheck)             Checksum: 1ED205A8F19F90E9EB87DBE5909CD229;347.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 142.
+(rerunfilecheck)             Checksum: 677EB7800D419AFAF6A2C36B4C92C0E4;641.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 198.
  ) 
 Here is how much of TeX's memory you used:
- 8035 strings out of 495004
- 115610 string characters out of 6180662
- 212270 words of memory out of 5000000
- 11132 multiletter control sequences out of 15000+600000
- 24766 words of font info for 47 fonts, out of 8000000 for 9000
+ 8125 strings out of 495004
+ 116876 string characters out of 6180662
+ 211631 words of memory out of 5000000
+ 11199 multiletter control sequences out of 15000+600000
+ 25281 words of font info for 49 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 30i,8n,32p,666b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,8n,32p,690b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8
-a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sbc-template.pdf (5 pages, 460020 bytes).
+onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
+w/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb
+8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on sbc-template.pdf (7 pages, 737836 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
- 69 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 155 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
